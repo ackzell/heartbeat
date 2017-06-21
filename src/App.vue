@@ -55,15 +55,9 @@
       <v-container fluid>
         <v-slide-y-transition mode="out-in">
           <v-layout column align-center>
-            <img src="/public/v.png" alt="Vuetify.js" class="mb-5" />
-            <blockquote>
-              &#8220;First, solve the problem. Then, write the code.&#8221;
-              <footer>
-                <small>
-                  <em>&mdash;John Johnson</em>
-                </small>
-              </footer>
-            </blockquote>
+
+            <remotes-list></remotes-list>
+
           </v-layout>
         </v-slide-y-transition>
       </v-container>
@@ -91,7 +85,12 @@
 </template>
 
 <script>
+  import RemotesList from './components/RemotesList.vue'
+
   export default {
+    components: {
+      RemotesList
+    },
     data () {
       return {
         clipped: false,
@@ -103,7 +102,7 @@
         miniVariant: false,
         right: true,
         rightDrawer: false,
-        title: 'Vuetify.js'
+        title: 'heartbeat'
       }
     }
   }
