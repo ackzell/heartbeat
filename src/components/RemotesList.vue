@@ -1,12 +1,16 @@
 <template>
   <div>
-    Remotes list goes here!
+    <remote v-for="x in 10"></remote>
   </div>
 </template>
 
 <script>
-  export default {
+import Remote from './Remote.vue'
+export default {
+  components: {
+    Remote
   }
+}
 </script>
 
 <style>
