@@ -1,7 +1,12 @@
 <template>
-  <v-list>
-    <remote v-for="(key, val, idx) in myRemotes" :key="idx" :name="key.alias"></remote>
-  </v-list>
+  <v-card>
+    <v-card-title primary-title class="light-blue white--text">
+      <div class="headline">My Remotes List</div>
+    </v-card-title>
+    <v-list>
+      <remote v-for="(key, val, idx) in myRemotes" :key="idx" :name="key.alias"></remote>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
