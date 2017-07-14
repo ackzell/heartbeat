@@ -1,12 +1,11 @@
 <template>
-  <v-card>
-    <v-card-title primary-title class="light-blue white--text">
-      <div class="headline">My Remotes List</div>
-    </v-card-title>
-    <v-list>
-      <remote v-for="(key, val, idx) in myRemotes" :key="idx" :name="key.alias"></remote>
-    </v-list>
-  </v-card>
+  <v-list subheader two-line>
+    <v-subheader>Current status</v-subheader>
+    <remote v-for="(key, val, idx) in myRemotes" :key="idx"
+            :alias="key.alias"
+            :uri="key.uri"
+            :status="key.status"></remote>
+  </v-list>
 </template>
 
 <script>
@@ -17,6 +16,7 @@ const services = [
   {
     uri: 'http://localhost:8761/health',
     alias: 'Registry',
+
   },
   {
     uri: 'http://localhost:9999/uaa/health',
@@ -25,6 +25,7 @@ const services = [
   {
     uri: 'http://localhost:8765/health',
     alias: 'Gateway this is a very long name 2234',
+    status: 'online'
   },
   {
     uri: 'http://localhost:9090/health',
