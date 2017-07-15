@@ -1,75 +1,43 @@
 <template>
   <v-app>
     <main>
-      <v-container fluid>
+      <v-container fluid class="pa-0">
         <v-slide-y-transition mode="out-in">
-          <v-layout column align-center>
+          <v-layout>
+            <v-flex>
+              <v-card>
 
-            <v-tabs dark centered grow>
+                <v-toolbar class="primary" dark>
+                  <v-toolbar-title>Heartbeat</v-toolbar-title>
+                   <v-btn fab
+                          bottom
+                          absolute
+                          right
+                          dark
+                          class="green darken-2 mr-5"
+                          @click.native="add"
+                          >
+                    <v-icon>add</v-icon>
+                  </v-btn>
+                </v-toolbar>
 
-              <v-tabs-bar slot="activators">
+                <v-card-text class="pa-0">
+                 <remotes-list :remotes-list="services"></remotes-list>
+                </v-card-text>
 
-                <v-tabs-slider class="white"></v-tabs-slider>
-
-                <v-tabs-item href="#remotes-list" >
-                  Remotes list
-                </v-tabs-item>
-                <v-tabs-item href="#tab-2" >
-                  Config
-                </v-tabs-item>
-              </v-tabs-bar>
-
-              <v-tabs-content id="remotes-list">
-                <v-layout justify-center>
-                  <v-flex xs8 class="mt-5 mb-5">
-                    <v-card class="pb-4">
-                      <v-card-text>
-                        <v-btn
-                        absolute
-                        dark
-                        fab
-                        bottom
-                        right
-                        small
-                        class="primary"
-                      >
-                        <v-icon>add</v-icon>
-                      </v-btn>
-                      <remotes-list></remotes-list>
-                      </v-card-text>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-              </v-tabs-content>
-
-              <v-tabs-content id="tab-2">
-                <v-card>
-                  hello
-                </v-card>
-              </v-tabs-content>
-
-            </v-tabs>
-
+              </v-card>
+            </v-flex>
           </v-layout>
         </v-slide-y-transition>
       </v-container>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed">
+
+    <v-footer :fixed="true">
       <span>&copy; 2017</span>
+      <v-spacer></v-spacer>
+                  <v-btn icon>
+                    <v-icon>settings</v-icon>
+                  </v-btn>
     </v-footer>
   </v-app>
 </template>
@@ -77,22 +45,48 @@
 <script>
   import RemotesList from './components/RemotesList.vue'
 
+
+  const services = [
+  {
+    uri: 'http://localhost:8761/health',
+    alias: 'Registry',
+
+  },
+  {
+    uri: 'http://localhost:9999/uaa/health',
+    alias: 'SSO',
+  },
+  {
+    uri: 'http://localhost:8765/health',
+    alias: 'Gateway this is a very long name 2234',
+    status: 'online'
+  },
+  {
+    uri: 'http://localhost:9090/health',
+    alias: 'Homepage',
+  },
+  {
+    uri: 'http://localhost:8010/health',
+    alias: 'Consumer Exposure longer name',
+  }
+]
+
   export default {
     components: {
       RemotesList
     },
     data () {
       return {
-        clipped: false,
-        drawer: true,
-        fixed: false,
-        items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
-        ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'heartbeat'
+        services,
+        counter: 1
+      }
+    },
+    methods: {
+      add() {
+        this.services.unshift({
+            uri: 'http://localhost:8010/health',
+            alias: 'Consumer Exposure longer name',
+          })
       }
     }
   }
