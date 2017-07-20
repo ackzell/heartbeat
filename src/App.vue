@@ -14,7 +14,7 @@
                           absolute
                           right
                           dark
-                          class="green darken-2 mr-5"
+                          class="mr-5"
                           @click.native="add"
                           >
                     <v-icon>add</v-icon>
@@ -30,12 +30,14 @@
           </v-layout>
         </v-slide-y-transition>
       </v-container>
+
+      <settings-dialog :dialog.sync="dialog"></settings-dialog>
     </main>
 
     <v-footer :fixed="true">
       <span>&copy; 2017</span>
       <v-spacer></v-spacer>
-                  <v-btn icon>
+                  <v-btn icon @click.native.stop="dialog = true">
                     <v-icon>settings</v-icon>
                   </v-btn>
     </v-footer>
@@ -44,7 +46,7 @@
 
 <script>
   import RemotesList from './components/RemotesList.vue'
-
+  import SettingsDialog from './components/SettingsDialog.vue'
 
   const services = [
   {
@@ -73,12 +75,13 @@
 
   export default {
     components: {
-      RemotesList
+      RemotesList,
+      SettingsDialog
     },
     data () {
       return {
         services,
-        counter: 1
+        dialog: false
       }
     },
     methods: {
