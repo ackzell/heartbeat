@@ -7,7 +7,7 @@
             <v-flex>
               <v-card>
 
-                <v-toolbar class="primary" dark>
+                <v-toolbar class="primary" dark fixed>
                   <v-toolbar-title>Heartbeat</v-toolbar-title>
                    <v-btn fab
                           bottom
@@ -15,7 +15,7 @@
                           right
                           dark
                           class="mr-5"
-                          @click.native="add"
+                          @click.native.stop="add"
                           >
                     <v-icon>add</v-icon>
                   </v-btn>
@@ -31,13 +31,14 @@
         </v-slide-y-transition>
       </v-container>
 
-      <settings-dialog :dialog.sync="dialog"></settings-dialog>
+      <settings-dialog :dialog.sync="settingsDialog"></settings-dialog>
+
     </main>
 
     <v-footer :fixed="true">
       <span>&copy; 2017</span>
       <v-spacer></v-spacer>
-                  <v-btn icon @click.native.stop="dialog = true">
+                  <v-btn icon @click.native.stop="settingsDialog = true">
                     <v-icon>settings</v-icon>
                   </v-btn>
     </v-footer>
@@ -81,15 +82,12 @@
     data () {
       return {
         services,
-        dialog: false
+        settingsDialog: false
       }
     },
     methods: {
       add() {
-        this.services.unshift({
-            uri: 'http://localhost:8010/health',
-            alias: 'Consumer Exposure longer name',
-          })
+
       }
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <v-layout>
-    <v-dialog v-model="internalDialog" fullscreen transition="dialog-bottom-transition" :overlay=false>
+    <v-dialog v-model="internalDialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
       <v-card>
-        <v-toolbar dark class="primary">
+        <v-toolbar dark fixed class="secondary">
           <v-btn icon @click.native.stop="close()" dark>
             <v-icon>close</v-icon>
           </v-btn>
@@ -13,11 +13,11 @@
           </v-toolbar-items>
         </v-toolbar>
         <v-list three-line subheader>
-          <v-subheader>User Controls</v-subheader>
+          <v-subheader>Global settings</v-subheader>
           <v-list-tile avatar>
             <v-list-tile-content>
-              <v-list-tile-title>Content filtering</v-list-tile-title>
-              <v-list-tile-sub-title>Set the content filtering level to restrict appts that can be downloaded</v-list-tile-sub-title>
+              <v-list-tile-title>Ping interval</v-list-tile-title>
+              <v-list-tile-sub-title>Set the interval between pings in ms</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile avatar>
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit('update:dialog', false);
+      this.$emit('update:dialog', false)
     }
   }
 }
