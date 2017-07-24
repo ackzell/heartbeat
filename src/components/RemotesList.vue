@@ -1,11 +1,13 @@
 <template>
-  <v-list two-line>
+  <v-card>
+    <v-list two-line>
       <remote v-for="(key, val, idx) in remotesList" :key="idx"
               :alias="key.alias"
               :uri="key.uri"
               :status="key.status"
               ></remote>
-  </v-list>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
