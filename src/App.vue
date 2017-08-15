@@ -54,4 +54,7 @@ export default {
 
 <style lang="stylus">
   @import './stylus/main'
+
+  main
+    height: 475px
 </style>

@@ -1,8 +1,5 @@
 {
   "workbench.colorTheme": "Material Theme",
-  "materialTheme.cache.workbench.settings": {
-    "themeColours": "Default"
-  },
   "editor.formatOnSave": true,
   "prettier.semi": false,
   "prettier.singleQuote": true

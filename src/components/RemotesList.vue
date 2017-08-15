@@ -1,52 +1,37 @@
 <template>
-  <v-card style="position: relative; top: -15px">
+  <v-card class="remotes-list" v-if="allRemotes.length">
     <v-list two-line>
-      <remote v-for="(key, val, idx) in remotesList" :key="idx" :alias="key.alias" :uri="key.uri" :status="key.status"></remote>
+      <remote v-for="(key, val, idx) in allRemotes" :key="idx" :alias="key.alias" :uri="key.uri" :status="key.status"></remote>
     </v-list>
+  </v-card>
+  <v-card v-else class="no-remotes text-xs-center elevation-1">
+    <v-card-text>
+      Please Add a remote to listen to
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 import Remote from './Remote.vue'
-
-const services = [
-  {
-    uri: 'http://localhost:8761/health',
-    alias: 'Registry',
-
-  },
-  {
-    uri: 'http://localhost:9999/uaa/health',
-    alias: 'SSO',
-  },
-  {
-    uri: 'http://localhost:8765/health',
-    alias: 'Gateway this is a very long name 2234',
-    status: 'online'
-  },
-  {
-    uri: 'http://localhost:9090/health',
-    alias: 'Homepage',
-  },
-  {
-    uri: 'http://localhost:8010/health',
-    alias: 'Consumer Exposure longer name',
-  }
-]
-
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     Remote
   },
-  data() {
-    return {
-      remotesList: services
-    }
+  computed: {
+    ...mapGetters([
+      'allRemotes'
+    ])
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
+
+  .remotes-list
+    top: -15px
+  .no-remotes
+    top: 160px
 
 </style>
