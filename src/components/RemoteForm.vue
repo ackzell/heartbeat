@@ -1,6 +1,7 @@
 <template>
   <form @keyup.enter="save">
-    <v-card style="position: relative; top: -15px" class="pa-2">
+    <v-progress-linear :indeterminate="true" v-if="loading"></v-progress-linear>
+    <v-card v-if="!loading" class="pa-2">
       <v-card-title>Remote</v-card-title>
       <v-card-text>
         <v-text-field prepend-icon="visibility" label="Alias" suffix=" " v-model="remote.alias"></v-text-field>
@@ -23,13 +24,23 @@ export default {
       this.$router.push({ path: '/' })
     },
     save() {
-      this.$store.commit('addRemote', this.remote)
+      this.$store.commit('saveRemote', this.remote)
       this.$router.push({ path: '/' })
     },
+
+  },
+  created() {
+    this.loading = false;
+    this.remote = this.$store.getters.remote(this.remote.uri)
   },
   data() {
     return {
-      remote: {}
+      loading: true,
+      remote: {
+        alias: this.$route.params ? this.$route.params.alias : '',
+        uri: this.$route.params ? this.$route.params.uri : '',
+        interval: this.$route.params ? this.$route.params.interval : ''
+      }
     }
   }
 }

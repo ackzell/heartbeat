@@ -3,5 +3,11 @@ import RemoteForm from './components/RemoteForm.vue'
 
 export const routes = [
   { path: '', component: RemotesList },
-  { path: '/remote', component: RemoteForm }
+  { path: '/remote', component: RemoteForm },
+  {
+    path: '/remote/:uri',
+    name: 'editRemote',
+    component: RemoteForm,
+    props: true
+  }
 ]

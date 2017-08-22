@@ -30,14 +30,22 @@ export const storeDef = {
     },
     remotesCount: state => {
       return state.remotesList.length
+    },
+    remote: (state, getters) => uri => {
+      return state.remotesList.find(remote => remote.uri === uri) || {}
     }
   },
   mutations: {
-    addRemote: (state, remote) => {
-      state.remotesList.unshift(remote)
+    saveRemote: (state, remote) => {
+      let index = state.remotesList.findIndex(({ uri }) => uri === remote.uri)
+      if (index !== -1) {
+        state.remotesList[index] = remote
+      } else {
+        state.remotesList.unshift(remote)
+      }
     },
-    deleteRemote: (state, uri) => {
-      let index = state.remotesList.findIndex(({ uri }) => uri === uri)
+    deleteRemote: (state, uriParam) => {
+      let index = state.remotesList.findIndex(({ uri }) => uri === uriParam)
       state.remotesList.splice(index, 1)
     }
   }
