@@ -7,19 +7,19 @@
       </v-btn>
     </v-toolbar>
     <main>
-  
-      <v-container fluid class="pa-0">
+
+      <v-container fluid>
         <v-layout column>
           <v-slide-x-transition mode="out-in">
             <router-view></router-view>
           </v-slide-x-transition>
         </v-layout>
       </v-container>
-  
+
       <settings-dialog :dialog.sync="settingsDialog"></settings-dialog>
-  
+
     </main>
-  
+
     <v-footer :fixed="true">
       <span>&copy; 2017</span>
       <v-spacer></v-spacer>

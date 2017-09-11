@@ -5,7 +5,7 @@ export const routes = [
   { path: '', component: RemotesList },
   { path: '/remote', component: RemoteForm },
   {
-    path: '/remote/:uri',
+    path: '/remote/:id',
     name: 'editRemote',
     component: RemoteForm,
     props: true

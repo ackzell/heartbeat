@@ -1,7 +1,13 @@
 <template>
   <v-card class="remotes-list" v-if="allRemotes.length">
     <v-list two-line>
-      <remote v-for="(key, val, idx) in allRemotes" :key="idx" :alias="key.alias" :uri="key.uri" :status="key.status"></remote>
+      <remote v-for="(key, val) in allRemotes"
+              :key="key.id"
+              :id="key.id"
+              :alias="key.alias"
+              :uri="key.uri"
+              :status="key.status">
+      </remote>
     </v-list>
   </v-card>
   <v-card v-else class="no-remotes text-xs-center elevation-1">
@@ -29,8 +35,6 @@ export default {
 
 <style lang="stylus">
 
-  .remotes-list
-    top: -15px
   .no-remotes
     top: 160px
 

@@ -31,7 +31,8 @@ export default {
   },
   created() {
     this.loading = false;
-    this.remote = this.$store.getters.remote(this.remote.uri)
+    this.remote = this.$store.getters.remote(this.remote.id)
+    this.remote.interval = this.remote.interval || this.$store.getters.defaultInterval
   },
   data() {
     return {
@@ -39,7 +40,8 @@ export default {
       remote: {
         alias: this.$route.params ? this.$route.params.alias : '',
         uri: this.$route.params ? this.$route.params.uri : '',
-        interval: this.$route.params ? this.$route.params.interval : ''
+        interval: this.$route.params ? this.$route.params.interval : '',
+        id: this.$route.params ? this.$route.params.id : null
       }
     }
   }

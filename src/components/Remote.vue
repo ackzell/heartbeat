@@ -17,10 +17,10 @@
           <v-icon>more_vert</v-icon>
         </v-btn>
         <v-list>
-          <v-list-tile :to="{ path: `remote/${uri}` }">
+          <v-list-tile :to="{ path: `remote/${id}` }">
             <v-list-tile-title>Edit</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click.native="deleteRemote( uri )">
+          <v-list-tile @click.native="deleteRemote( id )">
             <v-list-tile-title>Remove</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -36,11 +36,13 @@ export default {
   props: {
     alias: String,
     uri: String,
-    status: String
+    status: String,
+    id: String,
+    interval: Number
   },
   methods: {
-    deleteRemote(uri) {
-      this.$store.commit('deleteRemote', uri)
+    deleteRemote(id) {
+      this.$store.commit('deleteRemote', id)
     }
   }
 }
