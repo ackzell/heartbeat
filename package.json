@@ -1,14 +1,16 @@
 {
   "name": "heartbeat",
-  "description": "A Vue.js project",
+  "description": "Monitor remote health endpoints. See if your services are up!",
   "version": "1.0.0",
   "author": "ackzell <ackzell@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" "
   },
   "dependencies": {
+    "concurrently": "^3.5.0",
     "vue": "2.4.2",
     "vue-router": "2.7.0",
     "vuetify": "0.14.11",
