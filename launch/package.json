@@ -1,0 +1,9 @@
+{
+  "name": "devenv",
+  "main": "http://localhost:8080/",
+  "node-remote": "http://*/*",
+  "chromium-args": "--mixed-context --load-extension='./devtools'",
+  "webkit": {
+    "plugin": true
+  }
+}
