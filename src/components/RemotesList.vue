@@ -1,12 +1,9 @@
 <template>
   <v-card class="remotes-list" v-if="allRemotes.length">
     <v-list two-line>
-      <remote v-for="(key, val) in allRemotes"
-              :key="key.id"
-              :id="key.id"
-              :alias="key.alias"
-              :uri="key.uri"
-              :status="key.status">
+      <remote v-for="rem in allRemotes"
+              :key="rem.id"
+              :remote="rem">
       </remote>
     </v-list>
   </v-card>

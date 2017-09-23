@@ -4,7 +4,7 @@
     <v-card v-if="!loading" class="pa-2">
       <v-card-title>Remote</v-card-title>
       <v-card-text>
-        <v-text-field prepend-icon="visibility" label="Alias" suffix=" " v-model="remote.alias"></v-text-field>
+        <v-text-field prepend-icon="visibility" label="Alias" suffix=" " v-model="remote.alias" autofocus></v-text-field>
         <v-text-field prepend-icon="cloud" label="URI" suffix=" " v-model="remote.uri"></v-text-field>
         <v-text-field prepend-icon="timer" label="Interval" suffix="ms" v-model="remote.interval"></v-text-field>
       </v-card-text>
