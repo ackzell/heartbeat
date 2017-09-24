@@ -10,7 +10,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'public': path.resolve(__dirname, './public')
+      public: path.resolve(__dirname, './public')
     }
   },
   module: {
@@ -19,8 +19,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-          }
+          loaders: {}
           // other vue-loader options go here
         }
       },
@@ -44,7 +43,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     }
   },
   devServer: {
@@ -54,7 +53,10 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  node: {
+    fs: 'empty'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
