@@ -4,38 +4,45 @@ export const storeDef = {
       interval: 15
     },
     remotesList: [
-      // {
-      //   id: '1',
-      //   uri: 'http://localhost:8761/health',
-      //   alias: 'Registry',
-      //   interval: 10,
-      //   status: '-'
-      // },
-      // {
-      //   id: '2',
-      //   uri: 'http://localhost:9999/uaa/health',
-      //   alias: 'SSO',
-      //   status: '-'
-      // },
-      // {
-      //   id: '3',
-      //   uri: 'http://localhost:8765/health',
-      //   alias: 'Gateway this is a very long name 2234',
-      //   status: '-'
-      // },
-      // {
-      //   id: '4',
-      //   uri: 'http://localhost:9090/health',
-      //   alias: 'Homepage',
-      //   interval: 5,
-      //   status: '-'
-      // },
+      {
+        id: '1',
+        uri: 'http://localhost:8761/health',
+        alias: 'Registry',
+        interval: 10,
+        status: '-',
+        monitor: {}
+      },
+      {
+        id: '2',
+        uri: 'http://localhost:9999/uaa/health',
+        alias: 'SSO',
+        status: '-',
+        interval: 10,
+        monitor: {}
+      },
+      {
+        id: '3',
+        uri: 'http://localhost:8765/health',
+        alias: 'Gateway this is a very long name 2234',
+        status: '-',
+        interval: 10,
+        monitor: {}
+      },
+      {
+        id: '4',
+        uri: 'http://localhost:9090/health',
+        alias: 'Homepage',
+        interval: 5,
+        status: '-',
+        interval: 10,
+        monitor: {}
+      } // ,
       // {
       //   id: '5',
       //   uri: 'http://localhost:8010/health',
       //   alias: 'Consumer Exposure longer name',
       //   status: '-'
-      // }
+      // },
       // {
       //   id: '5',
       //   uri: 'http://localhost:9000/health',
@@ -64,11 +71,15 @@ export const storeDef = {
   mutations: {
     saveRemote: (state, remote) => {
       let index = state.remotesList.findIndex(({ id }) => id === remote.id)
+      remote.uri = remote.uri.includes('http://')
+        ? remote.uri
+        : `http://${remote.uri}`
+      remote.status = '-'
+
       if (index !== -1) {
         state.remotesList[index] = remote
       } else {
         remote.id = '' + Date.now()
-        remote.status = '-'
         state.remotesList.unshift(remote)
       }
     },

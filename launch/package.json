@@ -5,5 +5,8 @@
   "chromium-args": "--mixed-context --load-extension='./devtools'",
   "webkit": {
     "plugin": true
+  },
+  "window": {
+    "position": "mouse"
   }
 }

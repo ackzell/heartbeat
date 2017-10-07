@@ -1,10 +1,10 @@
 <template>
   <v-card class="remotes-list" v-if="allRemotes.length">
     <v-list two-line>
-      <remote v-for="rem in allRemotes"
-              :key="rem.id"
-              :remote="rem">
-      </remote>
+      <transition-group name="list" type="transition">
+        <remote v-for="rem in allRemotes" :key="rem.id" :remote="rem" class="list-item">
+        </remote>
+      </transition-group>
     </v-list>
   </v-card>
   <v-card v-else class="no-remotes text-xs-center elevation-1">
@@ -34,5 +34,16 @@ export default {
 
   .no-remotes
     top: 160px
+
+  .list-item
+    transition: all 1s
+    display: block
+
+  .list-enter, .list-leave-to
+    opacity: 0
+    transform: translateX(30px)
+
+  .list-leave-active
+    position: absolute
 
 </style>

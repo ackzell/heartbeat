@@ -1,9 +1,10 @@
 <template>
   <v-list-tile avatar>
-
     <v-list-tile-avatar>
-      <v-icon v-if="remote.status === 'online'" class="light-green darken-1 white--text">swap_vertical_circle</v-icon>
-      <v-icon v-else class="grey lighten-2 white--text">report_problem</v-icon>
+      <transition name="fade">
+        <v-icon v-if="remote.status === 'online'" class="light-green darken-1 white--text">swap_vertical_circle</v-icon>
+        <v-icon v-else class="grey lighten-2 white--text">report_problem</v-icon>
+      </transition>
     </v-list-tile-avatar>
 
     <v-list-tile-content>
@@ -20,7 +21,7 @@
           <v-list-tile :to="{ path: `remote/${remote.id}` }">
             <v-list-tile-title>Edit</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click.native="deleteRemote( remote.id )">
+          <v-list-tile @click="deleteRemote( remote.id )">
             <v-list-tile-title>Remove</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -33,11 +34,10 @@
 <script>
 
 import { mapState } from 'vuex'
-
-
-const Monitor = require('ping-monitor')
+import Monitor from '../mixins/pingLogic'
 
 export default {
+  mixins: [Monitor],
   props: {
     remote: {
       type: Object,
@@ -57,32 +57,6 @@ export default {
       monitor: null
     }
   },
-  mounted() {
-
-    console.log(' triggering twice? ')
-
-    this.monitor = new Monitor({
-      website: this.remote.uri,
-      interval: (10 / 60)
-    })
-
-    this.monitor.start()
-
-    this.monitor.on('up', res => {
-
-      console.log('Yay!! ' + this.remote.alias + ' is up.')
-
-      if (this.$store.getters.currentStatus(this.remote.id) !== 'online') {
-        this.$store.commit('updateStatus', { remoteId: this.remote.id, status: 'online' })
-      }
-
-    })
-
-    this.monitor.on('error', err => {
-      console.error('oops', err)
-      this.$store.commit('updateStatus', { remoteId: this.remote.id, status: '-' })
-    })
-  },
   methods: {
     deleteRemote(id) {
       this.$store.commit('deleteRemote', id)
@@ -91,6 +65,14 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .8s
+}
 
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
+}
 </style>

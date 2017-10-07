@@ -10,9 +10,9 @@
 
       <v-container fluid>
         <v-layout column>
-          <v-slide-x-transition mode="out-in">
+          <v-slide-y-transition mode="out-in">
             <router-view></router-view>
-          </v-slide-x-transition>
+          </v-slide-y-transition>
         </v-layout>
       </v-container>
 
