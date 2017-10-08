@@ -8,12 +8,12 @@ module.exports = {
       method: 'GET'
     })
 
-    this.monitor.on('up', (res, other) => {
+    this.monitor.on('up', res => {
       console.log('Yay!! ' + this.remote.alias + ' is up.')
 
-      if (this.$store.getters.currentStatus(this.remote.id) !== 'online') {
+      if (this.$store.getters.currentStatus(this.remote._id) !== 'online') {
         this.$store.commit('updateStatus', {
-          remoteId: this.remote.id,
+          remoteId: this.remote._id,
           status: 'online'
         })
       }
@@ -22,7 +22,7 @@ module.exports = {
     this.monitor.on('error', err => {
       console.warn('oops', err.website, 'is down :(')
       this.$store.commit('updateStatus', {
-        remoteId: this.remote.id,
+        remoteId: this.remote._id,
         status: '-'
       })
     })

@@ -5,8 +5,8 @@
       <v-card-title>Remote</v-card-title>
       <v-card-text>
         <v-text-field prepend-icon="visibility" label="Alias" suffix=" " v-model="remote.alias" autofocus></v-text-field>
-        <v-text-field prepend-icon="cloud" label="URI" suffix=" " v-model="remote.uri"></v-text-field>
-        <v-text-field prepend-icon="timer" label="Interval" suffix="ms" v-model="remote.interval"></v-text-field>
+        <v-text-field prepend-icon="cloud" prefix="http://" suffix=" " :value="remote.uri | hideProtocol" @input="value => { remote.uri = value }"></v-text-field>
+        <v-text-field prepend-icon="timer" label="Interval" suffix="s" v-model="remote.interval"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -18,20 +18,35 @@
 </template>
 
 <script>
+
 export default {
   methods: {
     cancel() {
       this.$router.push({ path: '/' })
     },
     save() {
-      this.$store.commit('saveRemote', this.remote)
-      this.$router.push({ path: '/' })
+      // this is the data we want to actually persist
+      const remote = {
+        _id: this.remote._id,
+        alias: this.remote.alias,
+        uri: this.remote.uri,
+        interval: this.remote.interval
+      }
+
+      this.loading = true
+      this.$store.dispatch('storeRemote', remote).then(() => {
+        this.loading = false
+        this.$router.push({ path: '/' })
+      }, err => {
+        console.log(err)
+      })
+
     },
 
   },
   created() {
-    this.loading = false;
-    this.remote = this.$store.getters.remote(this.remote.id)
+    this.loading = false
+    this.remote = this.$store.getters.remote(this.remote._id)
     this.remote.interval = this.remote.interval || this.$store.getters.defaultInterval
   },
   data() {
@@ -41,8 +56,15 @@ export default {
         alias: this.$route.params ? this.$route.params.alias : '',
         uri: this.$route.params ? this.$route.params.uri : '',
         interval: this.$route.params ? this.$route.params.interval : '',
-        id: this.$route.params ? this.$route.params.id : null
+        _id: this.$route.params ? this.$route.params._id : null
       }
+    }
+  },
+  filters: {
+    hideProtocol: function(value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.replace('http://', '')
     }
   }
 }

@@ -18,10 +18,10 @@
           <v-icon>more_vert</v-icon>
         </v-btn>
         <v-list>
-          <v-list-tile :to="{ path: `remote/${remote.id}` }">
+          <v-list-tile :to="{ path: `remote/${remote._id}` }">
             <v-list-tile-title>Edit</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile @click="deleteRemote( remote.id )">
+          <v-list-tile @click="removeRemote( remote._id )">
             <v-list-tile-title>Remove</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -33,7 +33,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import Monitor from '../mixins/pingLogic'
 
 export default {
@@ -46,7 +46,7 @@ export default {
           alias: '',
           uri: '',
           status: '-',
-          id: '',
+          _id: '',
           interval: 0
         }
       }
@@ -58,9 +58,9 @@ export default {
     }
   },
   methods: {
-    deleteRemote(id) {
-      this.$store.commit('deleteRemote', id)
-    }
+    ...mapActions([
+      'removeRemote'
+    ])
   }
 }
 </script>

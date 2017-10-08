@@ -2,7 +2,7 @@
   <v-card class="remotes-list" v-if="allRemotes.length">
     <v-list two-line>
       <transition-group name="list" type="transition">
-        <remote v-for="rem in allRemotes" :key="rem.id" :remote="rem" class="list-item">
+        <remote v-for="rem in allRemotes" :key="rem._id" :remote="rem" class="list-item">
         </remote>
       </transition-group>
     </v-list>
