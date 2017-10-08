@@ -54,9 +54,7 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map',
-  node: {
-    fs: 'empty'
-  }
+  target: 'node-webkit'
 }
 
 if (process.env.NODE_ENV === 'production') {

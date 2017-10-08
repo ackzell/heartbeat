@@ -10,6 +10,7 @@
     "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" "
   },
   "dependencies": {
+    "nedb": "^1.8.0",
     "ping-monitor": "^0.1.6",
     "vue": "2.4.2",
     "vue-router": "2.7.0",
@@ -17,11 +18,11 @@
     "vuex": "2.3.1"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-latest": "^6.0.0",
     "babel-preset-stage-2": "^6.24.1",
+    "concurrently": "^3.5.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
@@ -31,7 +32,7 @@
     "stylus-loader": "^3.0.1",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.4.2",
-    "webpack": "^2.7.0",
+    "webpack": "^3.6.0",
     "webpack-dev-server": "^2.6.1"
   },
   "build": {
