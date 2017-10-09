@@ -8,5 +8,8 @@
   },
   "window": {
     "position": "mouse"
+  },
+  "build": {
+    "nwVersion": "0.25.4"
   }
 }

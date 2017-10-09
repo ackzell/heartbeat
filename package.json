@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" "
+    "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" ",
+    "nwbuild": "./node_modules/.bin/build --mac --x64 ./dist",
+    "nwbuildapp": "npm run build && ./node_modules/.bin/build --mac --x64 ./dist"
   },
   "dependencies": {
     "nedb": "^1.8.0",
@@ -34,9 +36,5 @@
     "vue-template-compiler": "^2.4.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.6.1"
-  },
-  "build": {
-    "nwVersion": "0.24.4"
-  },
-  "main": "index.html"
+  }
 }

@@ -1,0 +1,12 @@
+{
+  "name": "heartbeat",
+  "description": "Monitor remote health endpoints. See if your services are up!",
+  "version": "1.0.0",
+  "author": "ackzell <ackzell@gmail.com>",
+  "private": true,
+  "build": {
+    "nwVersion": "0.25.4",
+    "output": "./nw-builds"
+  },
+  "main": "index.html"
+}
