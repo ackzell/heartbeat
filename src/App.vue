@@ -1,11 +1,11 @@
 <template>
-  <v-app>
-    <v-toolbar class="primary" dark fixed>
+  <v-app dark>
+    <v-toolbar class="primary" style="-webkit-app-region: drag;" dark fixed>
       <v-toolbar-title>Heartbeat</v-toolbar-title>
 
       <v-scale-transition mode="out-in" origin="center center">
 
-        <v-btn v-if="!$route.path.includes('/remote')" fab bottom absolute right dark class="mr-5" @click.native.stop="add">
+        <v-btn v-if="!$route.path.includes('/remote')" fab bottom absolute right class="mr-5 accent" @click.native.stop="add">
           <v-icon>add</v-icon>
         </v-btn>
       </v-scale-transition>
@@ -62,4 +62,13 @@ export default {
 
   main
     height: 475px
+
+  html, body
+    height: 100%
+    width: 100%
+    overflow: auto
+
+  html
+    overflow: hidden
+
 </style>

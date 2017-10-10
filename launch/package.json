@@ -7,7 +7,11 @@
     "plugin": true
   },
   "window": {
-    "position": "mouse"
+    "position": "mouse",
+    "width": 455,
+    "height": 460,
+    "frame": false,
+    "resizable": false
   },
   "build": {
     "nwVersion": "0.25.4"

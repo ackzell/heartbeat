@@ -6,7 +6,19 @@
   "private": true,
   "build": {
     "nwVersion": "0.25.4",
-    "output": "./nw-builds"
+    "output": "./nw-builds",
+    "mac": {
+      "name": "Heartbeat",
+      "displayName": "Heartbeat",
+      "icon": "./public/icon.icns"
+    }
   },
-  "main": "index.html"
+  "main": "index.html",
+  "window": {
+    "position": "mouse",
+    "width": 455,
+    "height": 460,
+    "frame": false,
+    "resizable": false
+  }
 }
