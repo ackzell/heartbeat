@@ -2,8 +2,12 @@
   <v-list-tile avatar>
     <v-list-tile-avatar>
       <transition name="fade">
-        <v-icon v-if="remote.status === 'online'" class="light-green darken-1 white--text">swap_vertical_circle</v-icon>
-        <v-icon v-else class="grey lighten-2 white--text">report_problem</v-icon>
+        <!-- <v-icon v-if="!remote.monitoring || remote.status === '-'" class="grey lighten-2 white--text">report_problem</v-icon>
+                              <v-icon v-else-if="remote.monitoring && remote.status === 'online'" class="light-green darken-1 white--text">swap_vert</v-icon>
+          <v-icon v-else-if="remote.monitoring && remote.status === 'offline'" class="red darken-1 white--text">not_interested</v-icon> -->
+
+        <v-icon class="white--text" :class="icon.classes">{{icon.name}}</v-icon>
+
       </transition>
     </v-list-tile-avatar>
 
@@ -13,19 +17,22 @@
     </v-list-tile-content>
 
     <v-list-tile-action>
-      <v-menu>
-        <v-btn icon slot="activator">
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-        <v-list>
-          <v-list-tile :to="{ path: `remote/${remote._id}` }">
-            <v-list-tile-title>Edit</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="removeRemote( remote._id )">
-            <v-list-tile-title>Remove</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
+      <v-layout>
+        <v-switch v-model="remote.monitoring" color="secondary" @change="toggleMonitor"></v-switch>
+        <v-menu>
+          <v-btn icon slot="activator" class="ml-2">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile :to="{ path: `remote/${remote._id}` }">
+              <v-list-tile-title>Edit</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="removeRemote( remote._id )">
+              <v-list-tile-title>Remove</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-layout>
     </v-list-tile-action>
 
   </v-list-tile>
@@ -47,7 +54,8 @@ export default {
           uri: '',
           status: '-',
           _id: '',
-          interval: 0
+          interval: 0,
+          monitoring: true
         }
       }
     }
@@ -60,7 +68,43 @@ export default {
   methods: {
     ...mapActions([
       'removeRemote'
-    ])
+    ]),
+    toggleMonitor(event) {
+
+      this.remote.status = '-'
+
+      if (this.remote.monitoring) {
+        this.createMonitor()
+      } else {
+        this.destroyMonitor()
+      }
+
+      this.$store.dispatch('storeRemote', this.remote)
+    }
+  },
+  computed: {
+    icon() {
+      let name = ''
+      let classes = []
+
+      if (!this.remote.monitoring || this.remote.status === '-') {
+        name = 'report_problem'
+        classes = ['grey', 'lighten-2']
+      } else {
+        if (this.remote.status === 'online') {
+          name = 'swap_vert'
+          classes = ['light-green', 'darken-1']
+        } else if (this.remote.status === 'offline') {
+          name = 'not_interested'
+          classes = ['red', 'darken-1']
+        }
+      }
+
+      return {
+        name,
+        classes
+      }
+    }
   }
 }
 </script>

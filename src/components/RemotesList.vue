@@ -1,12 +1,11 @@
 <template>
-  <v-card class="remotes-list" v-if="allRemotes.length">
-    <v-list two-line>
-      <transition-group name="list" type="transition">
-        <remote v-for="rem in allRemotes" :key="rem._id" :remote="rem" class="list-item">
-        </remote>
-      </transition-group>
-    </v-list>
-  </v-card>
+  <v-list two-line v-if="allRemotes.length">
+    <v-subheader>Remotes list</v-subheader>
+    <transition-group name="list" type="transition">
+      <remote v-for="rem in allRemotes" :key="rem._id" :remote="rem" class="list-item">
+      </remote>
+    </transition-group>
+  </v-list>
   <v-card v-else class="no-remotes text-xs-center elevation-1">
     <v-card-text>
       Please Add a remote to listen to

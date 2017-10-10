@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules && cp -R ./public ./dist/public",
     "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" ",
     "nwbuild": "./node_modules/.bin/build --mac --x64 ./dist",
     "nwbuildapp": "npm run build && ./node_modules/.bin/build --mac --x64 ./dist"

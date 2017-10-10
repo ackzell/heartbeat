@@ -2,13 +2,18 @@
   <v-app>
     <v-toolbar class="primary" dark fixed>
       <v-toolbar-title>Heartbeat</v-toolbar-title>
-      <v-btn fab bottom absolute right dark class="mr-5" @click.native.stop="add">
-        <v-icon>add</v-icon>
-      </v-btn>
+
+      <v-scale-transition mode="out-in" origin="center center">
+
+        <v-btn v-if="!$route.path.includes('/remote')" fab bottom absolute right dark class="mr-5" @click.native.stop="add">
+          <v-icon>add</v-icon>
+        </v-btn>
+      </v-scale-transition>
+
     </v-toolbar>
     <main>
 
-      <v-container fluid>
+      <v-container fluid class="pa-0">
         <v-layout column>
           <v-slide-y-transition mode="out-in">
             <router-view></router-view>
@@ -21,7 +26,7 @@
     </main>
 
     <v-footer :fixed="true">
-      <span>&copy; 2017</span>
+      <span>2017</span>
       <v-spacer></v-spacer>
       <v-btn icon @click.native.stop="settingsDialog = true">
         <v-icon>settings</v-icon>
