@@ -2,12 +2,7 @@
   <v-list-tile avatar>
     <v-list-tile-avatar>
       <transition name="fade">
-        <!-- <v-icon v-if="!remote.monitoring || remote.status === '-'" class="grey lighten-2 white--text">report_problem</v-icon>
-                              <v-icon v-else-if="remote.monitoring && remote.status === 'online'" class="light-green darken-1 white--text">swap_vert</v-icon>
-          <v-icon v-else-if="remote.monitoring && remote.status === 'offline'" class="red darken-1 white--text">not_interested</v-icon> -->
-
         <v-icon class="white--text" :class="icon.classes">{{icon.name}}</v-icon>
-
       </transition>
     </v-list-tile-avatar>
 
@@ -18,7 +13,7 @@
 
     <v-list-tile-action>
       <v-layout>
-        <v-switch v-model="remote.monitoring" color="secondary" @change="toggleMonitor"></v-switch>
+        <v-switch v-model="remote.monitoring" color="primary" @change="toggleMonitor"></v-switch>
         <v-menu>
           <v-btn icon slot="activator" class="ml-2">
             <v-icon>more_vert</v-icon>
@@ -39,7 +34,6 @@
 </template>
 
 <script>
-
 import { mapActions } from 'vuex'
 import Monitor from '../mixins/pingLogic'
 
@@ -66,11 +60,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'removeRemote'
-    ]),
+    ...mapActions(['removeRemote']),
     toggleMonitor(event) {
-
       this.remote.status = '-'
 
       if (this.remote.monitoring) {
@@ -87,7 +78,11 @@ export default {
       let name = ''
       let classes = []
 
-      if (!this.remote.monitoring || this.remote.status === '-') {
+      if (
+        !this.remote.monitoring ||
+        !this.remote.status ||
+        this.remote.status === '-'
+      ) {
         name = 'report_problem'
         classes = ['grey', 'lighten-2']
       } else {
@@ -112,11 +107,11 @@ export default {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .8s
+  transition: opacity 0.8s;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0
+  opacity: 0;
 }
 </style>

@@ -8,7 +8,7 @@
   </v-list>
   <v-card v-else class="no-remotes text-xs-center elevation-1">
     <v-card-text>
-      Please Add a remote to listen to
+      Please add a remote to listen to
     </v-card-text>
   </v-card>
 </template>
@@ -22,27 +22,27 @@ export default {
     Remote
   },
   computed: {
-    ...mapGetters([
-      'allRemotes'
-    ])
+    ...mapGetters(['allRemotes'])
   }
 }
 </script>
 
 <style lang="stylus">
+.no-remotes {
+  top: 160px;
+}
 
-  .no-remotes
-    top: 160px
+.list-item {
+  transition: all 1s;
+  display: block;
+}
 
-  .list-item
-    transition: all 1s
-    display: block
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
 
-  .list-enter, .list-leave-to
-    opacity: 0
-    transform: translateX(30px)
-
-  .list-leave-active
-    position: absolute
-
+.list-leave-active {
+  position: absolute;
+}
 </style>
