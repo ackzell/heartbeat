@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules && cp -R ./public ./dist/public",
     "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" ",
     "nwbuild": "./node_modules/.bin/build --mac --x64 ./dist",
-    "nwbuildapp": "npm run build && ./node_modules/.bin/build --mac --x64 ./dist"
+    "nwbuildapp": "npm run build && ./node_modules/.bin/build --mac --x64 ./dist && open ./dist/nw-builds"
   },
   "dependencies": {
     "nedb": "^1.8.0",
