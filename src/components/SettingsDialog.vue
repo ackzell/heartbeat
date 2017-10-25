@@ -40,9 +40,10 @@
                 <v-list-tile-content>
                   <v-list-tile-title>Sound</v-list-tile-title>
                   <v-list-tile-sub-title>Play a sound alongside the notification</v-list-tile-sub-title>
+                  <small>(Note that notifications should be enabled if you want to change this)</small>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-checkbox color="primary" v-model="shouldPlaySound"></v-checkbox>
+                  <v-checkbox :disabled="!shouldNotify" color="primary" v-model="shouldPlaySound"></v-checkbox>
                 </v-list-tile-action>
               </v-list-tile>
 

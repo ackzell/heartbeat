@@ -58,6 +58,8 @@ export const storeDef = {
             ? remote.uri
             : `http://${remote.uri}`
 
+        remote.interval = remote.interval || storeDef.state.defaults.interval
+
         let callback = (err, newRemote, updatedRemote) => {
           if (err) {
             console.error(err)

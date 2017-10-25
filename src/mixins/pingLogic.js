@@ -18,23 +18,27 @@ module.exports = {
             status: 'online'
           })
 
-          const notification =
-            notification ||
-            new Notification(`${this.remote.alias} is online.`, {
-              //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-              requireInteraction: true,
-              body: '\n \n Health endpoint is responding.'
-            })
+          if (this.$store.getters.defaults.notification) {
+            const notification =
+              notification ||
+              new Notification(`${this.remote.alias} is online.`, {
+                //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                requireInteraction: true,
+                body: '\n \n Health endpoint is responding.'
+              })
 
-          notification.onshow = () => {
-            const audio = new Audio('public/audio/just-like-magic.ogg')
-            audio.play()
+            notification.onshow = () => {
+              if (this.$store.getters.defaults.sound) {
+                const audio = new Audio('public/audio/just-like-magic.ogg')
+                audio.play()
+              }
+            }
           }
         }
       })
 
       this.monitor.on('error', err => {
-        console.warn('oops', err.website, 'is down :(')
+        console.warn(err.website, 'is down.')
 
         if (this.$store.getters.currentStatus(this.remote._id) !== 'offline') {
           this.$store.commit('updateStatus', {
@@ -42,16 +46,20 @@ module.exports = {
             status: 'offline'
           })
 
-          const notification =
-            notification ||
-            new Notification(`${this.remote.alias} is offline.`, {
-              //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-              body: 'No response from the health endpoint.'
-            })
+          if (this.$store.getters.defaults.notification) {
+            const notification =
+              notification ||
+              new Notification(`${this.remote.alias} is offline.`, {
+                //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                body: 'No response from the health endpoint.'
+              })
 
-          notification.onshow = () => {
-            const audio = new Audio('public/audio/you-wouldnt-believe.ogg')
-            audio.play()
+            notification.onshow = () => {
+              if (this.$store.getters.defaults.sound) {
+                const audio = new Audio('public/audio/you-wouldnt-believe.ogg')
+                audio.play()
+              }
+            }
           }
         }
       })
