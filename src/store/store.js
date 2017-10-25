@@ -1,10 +1,16 @@
 const Datastore = require('nedb')
 const db = {}
 
+const path = require('path')
+
+const filePaths = {
+  dbPath: path.join(nw.App.dataPath, 'remotes.db')
+}
+
 // TODO: figure out how to force this to use the node storing
 // instead of the IndexDB engine
 db.remotes = new Datastore({
-  filename: 'remotes.db',
+  filename: filePaths.dbPath,
   autoload: true,
   onload: err => {
     if (err) {
@@ -21,7 +27,9 @@ db.remotes = new Datastore({
 export const storeDef = {
   state: {
     defaults: {
-      interval: 15
+      interval: null,
+      notification: null,
+      sound: null
     },
     remotesList: []
   },
@@ -38,8 +46,8 @@ export const storeDef = {
     remote: state => _id => {
       return state.remotesList.find(remote => remote._id === _id) || {}
     },
-    defaultInterval: state => {
-      return state.defaults.interval
+    defaults: state => {
+      return state.defaults
     }
   },
   actions: {
@@ -114,6 +122,9 @@ export const storeDef = {
         })
         state.remotesList.splice(index, 1, newRemote)
       }
+    },
+    updateSettings: (state, settings) => {
+      state.defaults = settings
     }
   }
 }

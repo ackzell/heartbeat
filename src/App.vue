@@ -24,19 +24,21 @@
     </main>
 
     <v-footer :fixed="true">
-      <span>2017</span>
+
+      <v-btn icon @click.native.stop="settingsDialog = true">
+        <v-icon class="grey--text text--darken-3">settings</v-icon>
+      </v-btn>
+
       <v-spacer></v-spacer>
 
       <v-scale-transition mode="out-in" origin="center center">
-        <v-btn v-if="!$route.path.includes('/remote')" fab top right absolute class="mr-5 accent" @click.native.stop="add">
+        <v-btn v-if="!$route.path.includes('/remote')" fab top right absolute class=" accent" @click.native.stop="add">
           <v-icon>add</v-icon>
         </v-btn>
       </v-scale-transition>
 
-      <v-btn icon @click.native.stop="settingsDialog = true">
-        <v-icon>settings</v-icon>
-      </v-btn>
     </v-footer>
+
   </v-app>
 </template>
 
