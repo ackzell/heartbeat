@@ -10,7 +10,7 @@ module.exports = {
       })
 
       this.monitor.on('up', res => {
-        console.log('Yay!! ' + this.remote.alias + ' is up.')
+        console.log('Yay!! ' + res.alias + ' is up.')
 
         if (this.$store.getters.currentStatus(this.remote._id) !== 'online') {
           this.$store.commit('updateStatus', {
@@ -23,7 +23,7 @@ module.exports = {
               notification ||
               new Notification(`${this.remote.alias} is online.`, {
                 //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                requireInteraction: true,
+                //requireInteraction: true,
                 body: '\n \n Health endpoint is responding.'
               })
 
@@ -51,6 +51,7 @@ module.exports = {
               notification ||
               new Notification(`${this.remote.alias} is offline.`, {
                 //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                //requireInteraction: true,
                 body: 'No response from the health endpoint.'
               })
 

@@ -7,7 +7,10 @@
 
       <v-spacer></v-spacer>
 
-      <v-icon>close</v-icon>
+      <v-btn icon @click="closeWindow()">
+        <v-icon>close</v-icon>
+      </v-btn>
+
     </v-toolbar>
     <main>
 
@@ -45,11 +48,44 @@
 <script>
 import RemotesList from './components/RemotesList.vue'
 import SettingsDialog from './components/SettingsDialog.vue'
+let win = nw.Window.get()
 
 export default {
   components: {
     RemotesList,
     SettingsDialog
+  },
+  created() {
+    // Create an empty menubar
+    var menu = new nw.Menu({ type: 'menubar' })
+    menu.createMacBuiltin('Heartbeat', {
+      hideEdit: false,
+      hideWindow: false
+    })
+
+    // Create a submenu as the 2nd level menu
+    var submenu = new nw.Menu()
+    submenu.append(
+      new nw.MenuItem({
+        label: 'New Remote',
+        click: () => {
+          this.add()
+        },
+        key: 'n',
+        modifiers: 'cmd'
+      })
+    )
+
+    // Create and append the 1st level menu to the menubar
+    menu.append(
+      new nw.MenuItem({
+        label: 'Remotes',
+        submenu: submenu
+      })
+    )
+
+    // Assign it to `window.menu` to get the menu displayed
+    nw.Window.get().menu = menu
   },
   data() {
     return {
@@ -59,6 +95,9 @@ export default {
   methods: {
     add() {
       this.$router.push('/remote')
+    },
+    closeWindow() {
+      win.close()
     }
   }
 }

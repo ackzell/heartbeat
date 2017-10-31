@@ -7,13 +7,15 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules && cp -R ./public ./dist/public",
+    "icon": "node ./node_modules/png2icns/cli.js ./src/images/heartbeat.png -o ./dist/public/icon.icns",
     "nwdev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run --mac --x64 ./launch\" ",
-    "nwbuild": "./node_modules/.bin/build --mac --x64 ./dist",
-    "nwbuildapp": "npm run build && ./node_modules/.bin/build --mac --x64 ./dist && open ./dist/nw-builds"
+    "nwbuild": "./node_modules/.bin/build --mac --x64 ./dist && open ./dist/nw-builds",
+    "nwpack": "npm run icon && npm run build && ./node_modules/.bin/build --mac --x64 ./dist && open ./dist/nw-builds"
   },
   "dependencies": {
     "nedb": "^1.8.0",
     "ping-monitor": "^0.1.6",
+    "png2icns": "0.0.1",
     "vue": "2.4.2",
     "vue-router": "2.7.0",
     "vuetify": "^0.15.7",
