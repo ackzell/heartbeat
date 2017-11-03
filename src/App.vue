@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
 
-    <v-toolbar style="-webkit-app-region: drag;" dark fixed>
+    <v-toolbar style="-webkit-app-region: drag;" dark fixed dense>
 
       <v-toolbar-title>Heartbeat</v-toolbar-title>
 
@@ -119,5 +119,15 @@ html, body {
 
 html {
   overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* remove scrollbar space */
+  background: transparent; /* optional: just make scrollbar invisible */
+}
+
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
 }
 </style>

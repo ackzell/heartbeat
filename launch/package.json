@@ -10,7 +10,7 @@
     "width": 455,
     "height": 460,
     "frame": false,
-    "resizable": false
+    "resizable": true
   },
   "build": {
     "nwVersion": "0.25.4"
