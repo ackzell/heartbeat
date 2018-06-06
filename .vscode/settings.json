@@ -1,12 +1,13 @@
 {
-  "workbench.colorTheme": "Material Theme",
+  "workbench.colorTheme": "Material Theme Darker",
   "editor.formatOnSave": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "editor.fontFamily": "Anonymous Pro",
   "editor.fontSize": 14,
   "materialTheme.cache.workbench.settings": {
-    "colourTheme": "Default"
+    "colourTheme": "Darker"
   },
-  "vetur.format.defaultFormatter.html": "js-beautify-html"
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "editor.cursorBlinking": "solid"
 }
